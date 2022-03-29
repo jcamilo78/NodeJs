@@ -1,0 +1,17 @@
+# node para empezar a usarlo directo en la terminal
+> node
+
+#para salir del repl de node 
+> .exit   or CTRL + D  
+#by hitting tab in the terminal in repl node we can see all the global variables.
+click tab
+# se puede hacer calculos directos como 
+>9*4
+36
+>_+4
+40
+el _ te permite tomate el resultado de la sentencia anterior
+
+Puede escribir una libreria ejemplo String.
+
+y esto te mostrara todos sus metodos
