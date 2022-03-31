@@ -45,21 +45,26 @@ console.log(testFile);
 /////////////////////////////////
 // SERVER
 
+// in this way is more efficient because we just load once
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`,'utf-8');
+const dataObj = JSON.parse(data);
+
 const server = http.createServer((req, res) => {
     // console.log(req.url);
     const pathName = req.url
+
     if(pathName === '/' || pathName === '/overview'){
         res.end('This is the OVERVIEW!!!-)!');
     }else if (pathName === '/product'){
         res.end('This is the PRODUCT!-)!');
     } else if(pathName === '/api'){
-
-        fs.readFile(`${__dirname}/dev-data/data.json`,'utf-8',(err,data)=> {
-            const productData = JSON.parse(data);
-            res.writeHead(200,{'Content-type': 'application/json'})
+        const productData = JSON.parse(data);
+        res.writeHead(200,{'Content-type': 'application/json'});
+        res.end(data);
+        
+        // ,(err,data)=> {
             // console.log(productData);
-            res.end(data);
-        })
+        // })
         
     } else {
         res.writeHead(404, {
