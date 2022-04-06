@@ -50,13 +50,13 @@ console.log(testFile);
 // in this way e create a function to dymamicilly changes the selection and the /g mean that is a for global use this variables
 const replaceTemplate = (temp, product) => {
     let output = temp.replace(/{%PRODUCTNAME%}/g, product.productName);
-    output = temp.replace(/{%IMAGE%}/g, product.image);
-    output = temp.replace(/{%PRICE%}/g, product.price);
-    output = temp.replace(/{%FROM%}/g, product.from);
-    output = temp.replace(/{%NUTRIENTS%}/g, product.nutrients);
-    output = temp.replace(/{%QUANTITY%}/g, product.quantity);
-    output = temp.replace(/{%DESCRIPTION%}/g, product.description);
-    output = temp.replace(/{%ID%}/g, product.id);
+    output = output.replace(/{%IMAGE%}/g, product.image);
+    output = output.replace(/{%PRICE%}/g, product.price);
+    output = output.replace(/{%FROM%}/g, product.from);
+    output = output.replace(/{%NUTRIENTS%}/g, product.nutrients);
+    output = output.replace(/{%QUANTITY%}/g, product.quantity);
+    output = output.replace(/{%DESCRIPTION%}/g, product.description);
+    output = output.replace(/{%ID%}/g, product.id);
     
     if(!product.organic) output = output.replace(/{%NOT_ORGANIC%}/g, 'not-organic');
     return output;
@@ -71,26 +71,26 @@ const dataObj = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
     // console.log(req.url);
-    const pathName = req.url;
+    const pathname = req.url;
 
-// Overview Page 
-    if(pathName === '/' || pathName === '/overview'){
+// Overview page 
+    if (pathname === '/' || pathname === '/overview') {
         res.writeHead(200, {
           'Content-type': 'text/html'
     }); 
     //    investigate the map function
         const cardsHtml = dataObj.map(el => replaceTemplate(tempCard, el)).join('');
+        const output = tempOverview.replace('{%PRODUCT_CARDS%}', cardsHtml);
+        res.end(output);
         // next line is for testing 
         // console.log(cardsHtml);
-        const output = tempOverview.replace('{%PRODUCT_CARDS%}',cardsHtml);
-        res.end(output);
 // Product Page 
-    }else if (pathName === '/product'){
+    }else if (pathname === '/product'){
       res.writeHead(200, { 'Content-type': 'text/html'});
 
         res.end(tempProduct);
 // Api 
-    } else if(pathName === '/api'){
+    } else if(pathname === '/api'){
         const productData = JSON.parse(data);
         res.writeHead(200,{'Content-type': 'application/json'});
         res.end(data);
