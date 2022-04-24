@@ -3,7 +3,9 @@ const fs  = require('fs');
 const http = require('http');
 const { json } = require('stream/consumers');
 const url = require('url');
-//Second call local project modules
+// Second call 3rd Party modules
+const slugify = require('slugify');
+//Third call local project modules
 const replaceTemplate = require('./modules/replaceTemplate');
 /////////////////////////////////////////////
 // FILES
@@ -70,6 +72,10 @@ const tempProduct = fs.readFileSync(`${__dirname}/templates/template-product.htm
 
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`,'utf-8');
 const dataObj = JSON.parse(data);
+
+const slugs = dataObj.map(el => slugify(el.productName, {lower: true}));
+console.log(slugs);
+// console.log(slugify('Fresh Avocados', { lower : true}));
 
 const server = http.createServer((req, res) => {
     // to parse the url uncomment the following 2 lines
