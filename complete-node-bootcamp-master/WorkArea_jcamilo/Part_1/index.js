@@ -112,7 +112,7 @@ const server = http.createServer((req, res) => {
         res.end('<h1>Page not found!</h1>');  
     }
 });
-// 127.0.0.1 this is the standard ip for localhost
+// 27.0.0.1 this is the standard ip for localhost
 server.listen(8000, '127.0.0.1', () => {
     console.log('Listening to requiests on port 8000');
 });
