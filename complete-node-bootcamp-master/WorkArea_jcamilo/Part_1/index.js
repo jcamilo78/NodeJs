@@ -97,7 +97,7 @@ const server = http.createServer((req, res) => {
         // console.log(cardsHtml);
 // Product Page 
     }else if (pathname === '/product'){
-      res.writeHead(200, { 'Content-type': 'text/html'});
+      res.writeHead(200, { 'Content-type': "text/html"});
         // console.log(query);
         // res.end(tempProduct);
         const product = dataObj[query.id];
