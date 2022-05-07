@@ -1,4 +1,8 @@
 {
     "editor.bracketPairColorization.enabled": true,
-    "editor.bracketPairColorization.independentColorPoolPerBracketType": true
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+    "editor.formatOnType": false
 }
